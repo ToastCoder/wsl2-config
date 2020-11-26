@@ -32,8 +32,11 @@ if ($distro_opt -eq "n" -OR $distro_opt -eq "N")
     Write-Output "Enabling Virtual Machine from Windows Features..."
     dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 
-    Write-Output "Kindly install a WSL distribution from Microsoft Store"
-    Write-Output "https://www.microsoft.com/en-in/search?q=wsl"
+    Write-Output "Kindly install a WSL distribution from Microsoft Store and restart the script..."
+    Write-Output "Find it on https://www.microsoft.com/en-in/search?q=wsl"
 }
-setupWsl1
-convertWslToWSL2
+elseif ($distro_opt -eq "y" -OR $distro_opt -eq "Y")
+{
+    setupWsl1
+    convertWslToWSL2
+}
