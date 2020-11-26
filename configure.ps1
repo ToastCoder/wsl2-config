@@ -1,3 +1,9 @@
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) 
+{ 
+    Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs;
+    exit 
+}
+
 function setupWsl1
 {
     wsl.exe bash init.sh
@@ -34,9 +40,13 @@ if ($distro_opt -eq "n" -OR $distro_opt -eq "N")
 
     Write-Output "Kindly install a WSL distribution from Microsoft Store and restart the script..."
     Write-Output "Find it on https://www.microsoft.com/en-in/search?q=wsl"
+    
 }
 elseif ($distro_opt -eq "y" -OR $distro_opt -eq "Y")
 {
     setupWsl1
     convertWslToWSL2
 }
+
+Write-Host -NoNewLine 'Press any key to close this terminal:';
+$null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
