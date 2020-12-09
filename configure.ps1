@@ -15,7 +15,7 @@ function convertWslToWSL2
     $distro_name = Read-Host "What is the distro which you have installed? (Mention the exact Name and Version)"
     Write-Output "Downloading WSL2 Update Package"
     Invoke-WebRequest -Uri https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi -OutFile wsl_update_x64.msi
-    ./wsl_update_x64.msi
+    ./wsl_update_x64.msi /quiet
     Write-Output "Starting WSL Bash..."
     wsl.exe bash init.sh
     Write-Output "Converting WSL1 to WSL2..."
